@@ -1,6 +1,26 @@
+function changeColor(e) {
+    e.target.style.backgroundColor = "black";
+}
+
+function fillGrid() {
+    container.replaceChildren();
+    container.addEventListener("mouseover", (e) => changeColor(e))
+    for (let i = 0; i < gridSize; i++) {
+        const row = document.createElement("div");
+        row.classList.add("row");
+
+        for (let j = 0; j < gridSize; j++) {
+            const box = document.createElement("div");
+            box.classList.add("box");
+            row.appendChild(box);
+        }
+
+        container.appendChild(row);
+    }
+}
+
 const body = document.querySelector("body");
 const container = document.createElement("div");
-container.classList.add("container");
 
 let gridSize = 16;
 fillGrid();
@@ -15,38 +35,6 @@ button.addEventListener("click", () => {
     gridSize = response;
     fillGrid();
 });
+
 body.appendChild(button);
 body.appendChild(container);
-body.style.display = "flex";
-body.style.flexDirection = "column";
-body.style.justifyContent = "center";
-body.style.alignItems = "center";
-body.style.boxSizing = "border-box";
-
-
-function changeColor(e) {
-    e.target.style.backgroundColor = "black";
-}
-
-function fillGrid() {
-    container.replaceChildren();
-    for (let i = 0; i < gridSize; i++) {
-        const row = document.createElement("div");
-        row.classList.add("row");
-        row.style.display = "flex";
-        row.style.width = "960px"
-
-        for (let j = 0; j < gridSize; j++) {
-            const box = document.createElement("div");
-            box.classList.add("box");
-            box.style.border = "1px solid black";
-            box.style.flex = "1";
-            box.style.aspectRatio = "1";
-            box.addEventListener("mouseover", (e) => changeColor(e))
-            row.appendChild(box);
-        }
-
-        container.appendChild(row);
-
-    }
-}
